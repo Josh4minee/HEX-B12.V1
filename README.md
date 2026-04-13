@@ -34,3 +34,9 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - [Frame and Legs](./pictures/frampluslegs_page_1.jpg)
 - [Hexapod](./pictures/hexapod_page_1.jpg)
 - [Electronics Mounting](./pictures/electronics_mounting_page_1.jpg)
+
+**NOTE: ALL SERVOS MUST BE SET TO 90 PRIOR TO ANY ASSEMBLY**
+
+The above document prodive a visual on how parts are assembled, however, to assemble this in real life you must follow the [Frame and Legs](./pictures/frampluslegs_page_1.jpg) and [Hexapod](./pictures/hexapod_page_1.jpg) technical drawings. The order of operations is crucial here so making sure proper understanding is aquired before continuing is crucial. **Also keep in mind that 3 of these legs must be flipped**
+
+Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg orientation assembly.
