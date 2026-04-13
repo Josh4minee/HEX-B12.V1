@@ -26,10 +26,11 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
 - 
 ## Hexapod assembly
-- [Coxa](./pictures/coxa.pdf)
-- [Femur](./pictures/femur.pdf)
-- [Tibia](./pictures/tibia.pdf)
-- [Leg](./pictures/LEG_left.pdf)
-- [Frame](./pictures/mid_frame.pdf)
-- [Frame and legs](./pictures/fram+legs.pdf)
-- [Hexapod](./pictures/hexapod.pdf)
+- [Coxa](./pictures/coxa_page_1.jpg)
+- [Femur](./pictures/femur_page_1.jpg)
+- [Tibia](./pictures/tibia_page_1.jpg)
+- [Leg](./pictures/LEG_left_page_1.jpg)
+- [Mid Frame](./pictures/mid_frame_page_1.jpg)
+- [Frame and Legs](./pictures/frampluslegs_page_1.jpg)
+- [Hexapod](./pictures/hexapod_page_1.jpg)
+- [Electronics Mounting](./pictures/electronics_mounting_page_1.jpg)
