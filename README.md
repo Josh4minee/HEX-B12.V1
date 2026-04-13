@@ -4,7 +4,7 @@
 # HEX-B12.V1
 HEX-B12.V120 is a custom designed hexapod using mg996r servos and has it's theme based on the beloved bot B-12 from the popular video game STRAY, it is inspired by the Make Your Pet project and it is powered with a custom inverse kinematics based algorithm. 
 (the mechanical part dimensions are inspired by the [Make Your Pet](https://www.makeyourpet.com/) Chipo project, everything else is custom and made by me).
-
+#
 # Information
 Consult the following based on your needs:
 <ul>
@@ -15,7 +15,7 @@ Consult the following based on your needs:
 <li><a href="#Pre-powering on precautions">Pre-powering on precautions</a>
 <li><a href="#License">License</a>
 </ul>
-
+#
 ## How to use the remote
 
 The remote has 3 button, 2 knobs and a joystick.
@@ -24,7 +24,7 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - Crab mode, the hexapod follows joystick directions with out ever turning its body, the GAIT selection is the same as above.
 - Body Control Mode, here you can controll the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode and button 3 is for Z rotation mode.
 - Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
-- 
+#
 ## Hexapod assembly
 - [Coxa](./pictures/coxa_page_1.jpg)
 - [Femur](./pictures/femur_page_1.jpg)
