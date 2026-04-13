@@ -9,9 +9,9 @@ HEX-B12.V120 is a custom designed hexapod using mg996r servos and has it's theme
 Consult the following based on your needs:
 <ul>
 <li><a href="#How to use the remote">How to use the remote</a>
-<li><a href="#Remote Assembly">Remote Assembly</a>
+<li><a href="#Remote assembly">Remote Assembly</a>
 <li><a href="#Wiring diagram">Wiring diagram</a>
-<li><a href="#Hexapod Assembly">Hexapod Assembly</a>
+<li><a href="#Hexapod assembly">Hexapod Assembly</a>
 <li><a href="#Pre-powering on precautions">Pre-powering on precautions</a>
 <li><a href="#License">License</a>
 </ul>
@@ -24,3 +24,12 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - Crab mode, the hexapod follows joystick directions with out ever turning its body, the GAIT selection is the same as above.
 - Body Control Mode, here you can controll the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode and button 3 is for Z rotation mode.
 - Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
+
+## Hexapod assembly
+- <a href="/pictures/coxa.pdf">Coxa</a>
+- <a href="/pictures/femur.pdf">Femur</a>
+- <a href="/pictures/tibia.pdf">Tibia</a>
+- <a href="/pictures/LEG_left.pdf">Leg</a>
+- <a href="/pictures/mid_frame.pdf">Frame</a>
+- <a href="/pictures/.fram+legspdf">Frame and legs</a>
+- <a href="/pictures/hexapod.pdf">Hexapod</a>
