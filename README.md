@@ -24,12 +24,12 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - Crab mode, the hexapod follows joystick directions with out ever turning its body, the GAIT selection is the same as above.
 - Body Control Mode, here you can controll the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode and button 3 is for Z rotation mode.
 - Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
-
+- 
 ## Hexapod assembly
-- <a href="/pictures/coxa.pdf">Coxa</a>
-- <a href="/pictures/femur.pdf">Femur</a>
-- <a href="/pictures/tibia.pdf">Tibia</a>
-- <a href="/pictures/LEG_left.pdf">Leg</a>
-- <a href="/pictures/mid_frame.pdf">Frame</a>
-- <a href="/pictures/.fram+legspdf">Frame and legs</a>
-- <a href="/pictures/hexapod.pdf">Hexapod</a>
+- [Coxa](./pictures/coxa.pdf)
+- [Femur](./pictures/femur.pdf)
+- [Tibia](./pictures/tibia.pdf)
+- [Leg](./pictures/LEG_left.pdf)
+- [Frame](./pictures/mid_frame.pdf)
+- [Frame and legs](./pictures/fram+legs.pdf)
+- [Hexapod](./pictures/hexapod.pdf)
