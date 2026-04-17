@@ -86,5 +86,17 @@ The lower knob is for global height offset, the upper knob is used to control wh
 
 # Sources
 
+Here is a list of every model I used from GrabCad to display electronic components and screws in my asseblies:
+
+- [All M3-M2 screws](https://grabcad.com/library/m2-metric-socket-cap-head-screws-1)
+- [M3 square nuts](https://www.traceparts.com/en/product/din-square-nut?CatalogPath=TRACEPARTS%3ATP01001007016&Product=10-11062001-225045)
+- [NRF anttenna module and powe board](https://github.com/KrishnaHariharan/NRF24-Breakout-Board)
+- [NRF anttenna module and powe board](https://github.com/Ahsayn/nRF24-Breakout)
+- [MG996R servo & servo horns](https://grabcad.com/library/mg996r-servo-3)
+- [UBEC](https://grabcad.com/library/ubec-5v-5a-1)
+- [Lipo alarm](https://grabcad.com/library/1-8s-lipo-li-ion-fe-battery-voltage-2in1-tester-1)
+- [PCA servo driver](https://grabcad.com/library/pca9685-8)
+- [Double relay](https://grabcad.com/library/2ph63091a-2-channel-5v-relay-module-1)
+
 # License
 [License](LICENSE)
