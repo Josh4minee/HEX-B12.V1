@@ -2,9 +2,10 @@
 <img src="/pictures/hexapod.png" height="500" />
 
 # HEX-B12.V1
-HEX-B12.V120 is a custom designed hexapod using mg996r servos and has it's theme based on the beloved bot B-12 from the popular video game STRAY, it is inspired by the Make Your Pet project and it is powered with a custom inverse kinematics based algorithm. 
-(the mechanical part dimensions are inspired by the [Make Your Pet](https://www.makeyourpet.com/) Chipo project, everything else is custom and made by me).
-#
+HEX-B12.V120 is a custom-designed hexapod using MG996R servos. Its theme is based on the beloved bot B-12 from the popular video game [Stray](https://en.wikipedia.org/wiki/Stray_(video_game)). It is inspired by the Make Your Pet project and is powered by a custom inverse kinematics-based algorithm.
+
+The mechanical part dimensions are inspired by the [Make Your Pet](https://www.makeyourpet.com/) Chipo project; everything else is custom-made by me.
+
 # Information
 Consult the following based on your needs:
 - [Hexapod](#hexapod)
@@ -24,7 +25,7 @@ Consult the following based on your needs:
 
 # Wiring diagram
 
-Here you can find the wiring diagram, the component positions and the real world example of how it looks once completed.
+Here you can find the wiring diagram, component placements, and an IRL example of the completed build.
 <div>
   <img src="/pictures/hexapod circuit.jpg" height="400" />
   <img src="/pictures/Components_layout.png" height="400" />
@@ -43,11 +44,11 @@ Here you can find the wiring diagram, the component positions and the real world
 
 **NOTE: ALL SERVOS MUST BE SET TO 90 PRIOR TO ANY ASSEMBLY**
 
-**NOTE: KEEP IN MIND THAT 3 OF THESE LEGS MUST BE FLIPPED**
+**NOTE: KEEP IN MIND THAT THREE OF THESE LEGS MUST BE FLIPPED**
 
 **NOTE: DO NOT FORGET THE 18 FRICTION CAP RINGS**
 
-The above document prodive a visual on how parts are assembled, however, to assemble this in real life you must follow the [Frame and Legs](./pictures/frampluslegs_page_1.jpg) and [Hexapod](./pictures/hexapod_page_1.jpg) technical drawings. The order of operations is crucial here so making sure proper understanding is aquired before continuing is crucial.
+The above document provides a visual on how parts are assembled, to assemble this in real life you must follow the [Frame and Legs](./pictures/frampluslegs_page_1.jpg) and [Hexapod](./pictures/hexapod_page_1.jpg) technical drawings. The order of operations is very important here, so making sure proper understanding is acquired before continuing is mandatory.
 
 For screw sizes needed:
 - Every screw needed to attach a servo is M3 35mm.
@@ -72,13 +73,19 @@ Follow the diagram to assemble the remote, every screw used is M2 8mm.
 
 # How to use the remote
 
-The remote has 3 button, 2 knobs and a joystick.
-The lower knob is for global height offset, the upper knob is used to control what mode the user is on, and the 3 buttons are for 3 different states in these modes:
-- Normal walking mode, the hexapod turns and follows the joysticks direction, each button selects the current walking GAIT, 1 for tripod, 2 for wripple and 3 is actually an easter egg.
-- Crab mode, the hexapod follows joystick directions with out ever turning its body, the GAIT selection is the same as above.
-- Body Control Mode, here you can controll the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode and button 3 is for Z rotation mode.
-- Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
+The remote has 3 buttons, 2 knobs, and a joystick.
+The lower knob is for global height offset, the upper knob is used to control which mode the user is in, and the 3 buttons are for 3 different states in these modes:
+
+- Normal walking mode: the hexapod turns and follows the joystick’s direction. Each button selects the current walking GAIT: 1 for tripod, 2 for ripple, and 3 is actually an Easter egg.
+
+- Crab mode: the hexapod follows joystick directions without ever turning its body. The GAIT selection is the same as above.
+
+- Body control mode: here you can control the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode, and button 3 is for Z rotation mode.
+
+- Animation mode: in this mode, 3 animations can be selected using the 3 buttons.
 
 # Sources
 
 # License
+
+[License](./license)
