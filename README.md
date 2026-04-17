@@ -73,6 +73,7 @@ Here you can find the wiring diagram, component placements, and an IRL example o
 - [Frame and Legs](./pictures/frampluslegs_page_1.jpg)
 - [Hexapod](./pictures/hexapod_page_1.jpg)
 - [Electronics Mounting](./pictures/electronics_mounting_page_1.jpg)
+- [Servo pinouts](./pictures/electronics_mounting_page_1.jpg)
 
 **NOTE: ALL SERVOS MUST BE SET TO 90 PRIOR TO ANY ASSEMBLY**
 
