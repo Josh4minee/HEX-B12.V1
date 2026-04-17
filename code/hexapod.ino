@@ -88,7 +88,7 @@ void setup()
 
   radio.begin();                                 //----NRF transmission setup
   radio.openReadingPipe(0, address);
-  radio.setPALevel(RF24_PA_MIN);
+  radio.setPALevel(RF24_PA_LOW);
   radio.startListening();
   
   pwm1.begin();                                  //-----servo driver setup
@@ -101,19 +101,9 @@ void setup()
 
   pinMode(relay1, OUTPUT);
   pinMode(relay2, OUTPUT);
-  pinMode(10, OUTPUT);
+  pinMode(10, OUTPUT); // for proper NRF behavior
   digitalWrite(4, LOW);
   digitalWrite(7, LOW);
-
-//-----------------------------------------GAIT INFORMATION---------------------------------------
-
-//trypod gait
-trypod.time1 = 1;
-trypod.time2 = 2;
-trypod.time3 = 3;
-trypod.time4 = 4;
-trypod.time5 = 5;
-trypod.time6 = 6;
 
 }
 
@@ -148,105 +138,90 @@ void loop()
 //------------------------------------NRF COMMUNICATION----------------------------------------------
 
   if (radio.available())                    //read radio and reset data if connection is lost, prevent locking into a movement
-  {
-    //hello world test
-    char text[32] = "";
-    radio.read(&text, sizeof(text));
-    Serial.println(text);
+  {if (radio.available())
+{
+  radio.read(&data, sizeof(Data_Package));  // read struct directly
+  lastReceiveTime = millis();
 
-    //radio.read(&data, sizeof(Data_Package));
-    lastReceiveTime = millis(); 
-    //Serial.println(data.mode); Serial.println(data.height); 
-    //Serial.println(data.joystick_x); 
-    //Serial.println(data.joystick_y); Serial.println(data.joystick_select); Serial.println(data.option);
+  // Debug print
+  //Serial.print("Mode: "); Serial.println(data.mode);
+  //Serial.print("Height: "); Serial.println(data.height);
+  //Serial.print("Joy X: "); Serial.println(data.joystick_x);
+  //Serial.print("Joy Y: "); Serial.println(data.joystick_y);
+  //Serial.print("Joy Btn: "); Serial.println(data.joystick_select);
+  //Serial.print("Option: "); Serial.println(data.option);
+}
   }
   currentTime = millis();
 
   if ( currentTime - lastReceiveTime > 1000 ) 
-  resetData();
+  {
+    //innitial controller values
+    data.mode = 1; //mode selection
+    data.height = 127; // height offset
+    data.joystick_x = 127;
+    data.joystick_y = 127;
+    data.joystick_select = 0; // joystick button
+    data.option = 1; // the option for the current mode (1-3)
+  }
 
-//-----------------Mode select-------------------------
-
- switch(data.mode)
- {
-  case 1: {walkMode(); break;}
-  case 2: {crabMode(); break;}
-  case 3: {bodymovementMode(); break;}
-  case 4: {animationMode(); break;}
- }
-}
-
-void resetData()
-{
-  //innitial controller values
-  data.mode = 127; //mode selection
-  data.height = 127; // height offset
-  data.joystick_x = 127;
-  data.joystick_y = 127;
-  data.joystick_select = 0; // joystick button
-  data.option = 1; // the option for the current mode (1-3)
+ selectMode();
 }
 
 void startAnim()
 {
-  delay(10000);
-  pwm1.setPWM(15, 0, 368);
-  pwm1.setPWM(10, 0, 368);
-  pwm1.setPWM(2, 0, 368);
-  pwm2.setPWM(0, 0, 368);
-  pwm2.setPWM(5, 0, 368);
-  pwm2.setPWM(13, 0, 368);
-  delay(2000);
-  pwm1.setPWM(13, 0, 368);
-  pwm1.setPWM(8, 0, 368);
-  pwm1.setPWM(0, 0, 368);
-  pwm2.setPWM(2, 0, 368);
-  pwm2.setPWM(7, 0, 368);
-  pwm2.setPWM(15, 0, 368);
-  delay(2000);
-  pwm1.setPWM(14, 0, 268);
-  pwm1.setPWM(9, 0, 268);
-  pwm1.setPWM(1, 0, 268);
-  pwm2.setPWM(1, 0, 468);
-  pwm2.setPWM(6, 0, 468);
-  pwm2.setPWM(14, 0, 468);
-  delay(2000);
+
+}
+
+void selectMode(){
+  switch(data.mode){
+  case 1: walkMode(); break;
+  case 2: crabMode(); break;
+  case 3: bodymovementMode(); break;
+  case 4: animationMode(); break;
+ }
 }
 
 void walkMode()
 {
-  switch(data.option)
-  {
-    case 1: data.joystick_x; break;
-    case 2: data.joystick_y; break;
-    case 3: data.height; break;
+  switch(data.option){
+    case 1: ; break;
+    case 2: ; break;
+    case 3: ; break;
   }
 }
 
 void crabMode()
 {
-
+  switch(data.option){
+    case 1: ; break;
+    case 2: ; break;
+    case 3: ; break;
+  }
 }
 
 void bodymovementMode()
 {
-  IK();
+  switch(data.option){
+    case 1: ; break;
+    case 2: ; break;
+    case 3: ; break;
+  }
 }
 
 void animationMode()
 {
+  if(data.joystick_y > 200){
+    switch(data.option){
+      case 1: ; break;
+      case 2: ; break;
+      case 3: ; break;
+    }
+  }
 
 }
 
 void IK()
 {
-  switch(legID)
-  {
-    case 1: {OffsetX = 64; OffsetY = 98; OffsetA = 45; break;}
-    case 2: {OffsetX = 81; OffsetY = 0; OffsetA = 0; break;}
-    case 3: {OffsetX = 64; OffsetY = -98; OffsetA = -45; break;}
-    case 4: {OffsetX = -64; OffsetY = -98; OffsetA = -45; break;}
-    case 5: {OffsetX = -81; OffsetY = 0; OffsetA = 0; break;}
-    case 6: {OffsetX = -64; OffsetY = 98; OffsetA = 45; break;}
-  }
+
 }

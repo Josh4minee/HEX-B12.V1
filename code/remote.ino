@@ -19,9 +19,12 @@ bool lastButton1 = false;
 bool lastButton2 = false;
 bool lastButton3 = false;
 
+int modeMap; // used to clean up mapping with the mode potentiometer
+int heightMap; //used to clean up mapping with the height potentiometer
+
 struct Data_Package { // data package sent to hexapod
   byte mode;
-  byte hight;
+  byte height;
   byte joystick_x;
   byte joystick_y;
   byte joystick_select;
@@ -44,12 +47,12 @@ void setup()
   
   radio.begin();// NRF transmission setup
   radio.openWritingPipe(address);
-  radio.setPALevel(RF24_PA_MIN);
+  radio.setPALevel(RF24_PA_LOW);
   radio.stopListening();
 
   //innitial controller values
   data.mode = 127; //mode selection
-  data.hight = 127; // height offset
+  data.height = 127; // height offset
   data.joystick_x = 127;
   data.joystick_y = 127;
   data.joystick_select = 0; // joystick button
@@ -72,19 +75,30 @@ void loop()
   lastButton1 = button_1.isPressed();
   lastButton2 = button_2.isPressed();
   lastButton3 = button_3.isPressed();
-  Serial.print("Joystick mode set to "); // serial monitor
-  Serial.println(data.joystick_select);
+  //Serial.print("Joystick mode set to "); // serial monitor
+  //Serial.println(data.joystick_select);
   //Serial.println(data.option);
 
-  
-  data.mode = map(analogRead(A0), 0, 1023, 0, 255); // potentiometer value mapping
-  data.hight = map(analogRead(A1), 0, 1023, 0, 255);
+  modeMap = map(analogRead(A1), 0, 1023, 255, 0);
+
+  if (modeMap < 113){
+    if(modeMap < 60) data.mode = 1;
+    else data.mode = 2;
+  }
+  else{
+    if(modeMap < 169) data.mode = 3;
+    else data.mode = 4;
+  }
+
+  heightMap = constrain (analogRead(A0), 146, 842);
+  data.height = map(heightMap, 146, 842, 0, 255);
+
   data.joystick_x = map(analogRead(A2), 0, 1023, 0, 255);
   data.joystick_y = map(analogRead(A3), 0, 1023, 255, 0);
   //Serial.println(data.mode);// serial monitor
-  //Serial.println(data.hight);
-  Serial.println(data.joystick_x);
-  Serial.println(data.joystick_y);
+  //Serial.println(data.height);
+  //Serial.println(data.joystick_x);
+  //Serial.println(data.joystick_y);
 
   radio.write(&data, sizeof(Data_Package)); // send info to hexapod
 }
