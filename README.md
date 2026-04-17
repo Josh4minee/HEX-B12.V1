@@ -18,9 +18,11 @@ Consult the following based on your needs:
 # Wiring diagram
 
 Here you can find the wiring diagram, the component positions and the real world example of how it looks once completed.
-  <img src="/pictures/hexapod circuit.jpg" height="350" />
-  <img src="/pictures/Components_layout.png" height="350" />
-  <img src="/pictures/IRL_wiring.jpg" height="400" />
+<div>
+  <img src="/pictures/hexapod circuit.jpg" height="400" />
+  <img src="/pictures/Components_layout.png" height="400" />
+  <img src="/pictures/IRL_wiring.jpg" width="500" />
+<div>
   
 # Hexapod assembly
 - [Coxa](./pictures/coxa_page_1.jpg)
@@ -36,6 +38,8 @@ Here you can find the wiring diagram, the component positions and the real world
 
 **NOTE: KEEP IN MIND THAT 3 OF THESE LEGS MUST BE FLIPPED**
 
+**NOTE: DO NOT FORGET THE 18 FRICTION CAP RINGS**
+
 The above document prodive a visual on how parts are assembled, however, to assemble this in real life you must follow the [Frame and Legs](./pictures/frampluslegs_page_1.jpg) and [Hexapod](./pictures/hexapod_page_1.jpg) technical drawings. The order of operations is crucial here so making sure proper understanding is aquired before continuing is crucial.
 
 For screw sizes needed:
@@ -47,7 +51,17 @@ For screw sizes needed:
 
 Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg orientation assembly.
 
+# Pre-powering on precautions
+
+- Make sure the legs of the hexapod are clear of any obstacles.
+- Make sure all the legs are **RESTING** on the ground, the hexapod should **NOT** be standing.
+- After plugging in the battery, the hexapod will enter a 10 second timer before entering its start animation.
+
 # Remote assembly
+
+Follow the diagram to assemble the remote, every screw used is M2 8mm.
+
+
 
 # How to use the remote
 
