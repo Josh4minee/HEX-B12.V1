@@ -91,7 +91,7 @@ It is very recommended to apply sillicone based grease between the friction caps
 
 # Remote assembly
 
-Start by buying the PCB on [JLCPCB.](https://cart.jlcpcb.com/quote?stencilLayer=2&stencilWidth=100&stencilLength=100&stencilCounts=5&plateType=1&spm=Jlcpcb.Homepage.1010) by simply drag and droping the [gerber]() files.
+Start by buying the PCB on [JLCPCB.](https://cart.jlcpcb.com/quote?stencilLayer=2&stencilWidth=100&stencilLength=100&stencilCounts=5&plateType=1&spm=Jlcpcb.Homepage.1010) by simply drag and droping the [gerber](PCB/HEX_remote_GERBERS.zip) files.
 
 Once you have received and soldered your PCB, follow the diagram to assemble the remote, every screw used is M2 8mm.
 
