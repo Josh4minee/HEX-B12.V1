@@ -47,6 +47,14 @@ I ended up making 2 versions because I tried to directly hook up an NRF module o
 
 # Printing
 
+The following are the settings used to print this hexapod:
+
+- 15% grid infill everywhere, 0.28mm height and 3 walls on every part except for the 0.16mm servo shields to keep them smooth.
+- Every STL file is pre-oriented and ready to print, the only parts requiring support material are the top plate, the shields, the coxa and femur horn parts, the guides. Any additional supports are not usefull.
+- Printing the remote uses the same settings and the files are also pre-oriented, only the mid plate requires supports.
+- The number of parts needed to be printed is indicated at the end of the names of every STL file.
+- All STL files can be found the the [STL](./STL) folder.
+
 # Wiring diagram
 
 Here you can find the wiring diagram, component placements, and an IRL example of the completed build.
@@ -67,6 +75,8 @@ Here you can find the wiring diagram, component placements, and an IRL example o
 - [Electronics Mounting](./pictures/electronics_mounting_page_1.jpg)
 
 **NOTE: ALL SERVOS MUST BE SET TO 90 PRIOR TO ANY ASSEMBLY**
+
+**NOTE: KEEP IN MIND THAT 3 OF THESE LEGS ARE FLIPPED**
 
 **NOTE: DO NOT FORGET THE 18 FRICTION CAP RINGS**
 
