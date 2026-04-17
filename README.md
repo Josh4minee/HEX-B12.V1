@@ -87,5 +87,4 @@ The lower knob is for global height offset, the upper knob is used to control wh
 # Sources
 
 # License
-
-[License](./license)
+[License](LICENSE)
