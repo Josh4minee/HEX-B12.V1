@@ -7,6 +7,8 @@ HEX-B12.V120 is a custom designed hexapod using mg996r servos and has it's theme
 #
 # Information
 Consult the following based on your needs:
+- [Hexapod](#hexapod)
+- [Remote](#remote)
 - [Wiring diagram](#wiring-diagram)
 - [Hexapod Assembly](#hexapod-assembly)
 - [Pre-powering on precautions](#pre-powering-on-precautions)
@@ -14,6 +16,11 @@ Consult the following based on your needs:
 - [How to use the remote](#how-to-use-the-remote)
 - [Sources](#sources)
 - [License](#license)
+
+# Hexapod
+
+# Remote
+
 
 # Wiring diagram
 
@@ -61,7 +68,7 @@ Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg 
 
 Follow the diagram to assemble the remote, every screw used is M2 8mm.
 
-
+  <img src="/pictures/HEX_remote_assembly.jpg" height="400" />
 
 # How to use the remote
 
