@@ -45,6 +45,6 @@ For screw sizes needed:
 - Every screw needed to clamp together femur/coxa parts is M3 25mm.
 - Every screw that holds down the friction caps is M2 10mm.
 - Every other screw is M2 8mm.
-- Follow [this](./pictures/leg_orientations.png) diagram for M2 heat insert assembly.
+- Follow [this](./pictures/Hexapod_Heated_Insert_placements.png) diagram for M2 heat insert assembly.
 
-Follow [this](./pictures/Hexapod_Heated_Insert_placements.png) technical drawing for proper leg orientation assembly.
+Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg orientation assembly.
