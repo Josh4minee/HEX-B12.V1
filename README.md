@@ -15,7 +15,7 @@ Consult the following based on your needs:
 <li><a href="#Pre-powering on precautions">Pre-powering on precautions</a>
 <li><a href="#License">License</a>
 </ul>
-#
+
 ## How to use the remote
 
 The remote has 3 button, 2 knobs and a joystick.
