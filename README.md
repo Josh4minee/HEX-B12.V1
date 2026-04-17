@@ -21,6 +21,8 @@ Consult the following based on your needs:
 
 # Hexapod
 
+Why I made this hexapod is because since I was young I have always wanted to build "stuff", making robots was always very appealing to me and this project is simpler than a quadruped yet just as fun for a beginner like me and I hope the people that come across this project like it! It is worth mentionning that this is also a college project hense why I have put so much time and effort on it in such a short ammount of time.
+
 As per the title, this hexapod uses MG996R servos, this decision was made because of cost, any other servo is 3x to 4x the price of these ones.
 
 The power system consists of one big 5200mAh 2S lipo battery for optimal opperation time, three UBECs for stable 7v to 5v conversion and one 10A manual reset fuse.
