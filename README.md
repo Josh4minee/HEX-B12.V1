@@ -16,7 +16,7 @@ Consult the following based on your needs:
 <li><a href="#License">License</a>
 </ul>
 
-## How to use the remote
+# How to use the remote
 
 The remote has 3 button, 2 knobs and a joystick.
 The lower knob is for global height offset, the upper knob is used to control what mode the user is on, and the 3 buttons are for 3 different states in these modes:
@@ -25,7 +25,7 @@ The lower knob is for global height offset, the upper knob is used to control wh
 - Body Control Mode, here you can controll the hexapod body. Button 1 is for planar offset mode, button 2 is for XY rotation offset mode and button 3 is for Z rotation mode.
 - Animation Mode, in this mode, 3 animations can be selected using the 3 buttons.
 
-## Hexapod assembly
+# Hexapod assembly
 - [Coxa](./pictures/coxa_page_1.jpg)
 - [Femur](./pictures/femur_page_1.jpg)
 - [Tibia](./pictures/tibia_page_1.jpg)
