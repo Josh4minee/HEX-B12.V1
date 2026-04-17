@@ -10,6 +10,7 @@ The mechanical part dimensions are inspired by the [Make Your Pet](https://www.m
 Consult the following based on your needs:
 - [Hexapod](#hexapod)
 - [Remote](#remote)
+- [Printing](#printing)
 - [Wiring diagram](#wiring-diagram)
 - [Hexapod Assembly](#hexapod-assembly)
 - [Pre-powering on precautions](#pre-powering-on-precautions)
@@ -20,8 +21,31 @@ Consult the following based on your needs:
 
 # Hexapod
 
+As per the title, this hexapod uses MG996R servos, this decision was made because of cost, any other servo is 3x to 4x the price of these ones.
+
+The power system consists of one big 5200mAh 2S lipo battery for optimal opperation time, three UBECs for stable 7v to 5v conversion and one 10A manual reset fuse.
+
+An arduino nano was used as the brains of this project simply because it was a requirement from my college and it is thanfully fast enough for its use case.
+
+An [Adafruit PCA9685](https://learn.adafruit.com/16-channel-pwm-servo-driver/overview) servo driver was chosen to controll the huge amount fof servos this robot requires.
+
+The nRF24L01+PA+LNA modules were chosen for wireless communication, the power emplified version was used for its antenna (to keep the resemblance of [B-12](https://stray.fandom.com/wiki/B-12)) and for its range.
+
+Finally, relays were added for ease of use and safety, like only turning on the servos 5s after the battery is pluged in.
+
+
 # Remote
 
+The main reason the remote was made is because I did not want to work with bluetooth or web based control. 
+
+Making a remote seemed more interesting anyways and it allowed me to design my very first custom PCB:
+
+  <img src="/pictures/PCB_front.jpg" height="400" />
+  <img src="/pictures/PCB_back.jpg" height="400" />
+
+I ended up making 2 versions because I tried to directly hook up an NRF module on the first version, this ended up failing to I just made a custom footprint for the NRF module power boards.
+
+# Printing
 
 # Wiring diagram
 
@@ -44,8 +68,6 @@ Here you can find the wiring diagram, component placements, and an IRL example o
 
 **NOTE: ALL SERVOS MUST BE SET TO 90 PRIOR TO ANY ASSEMBLY**
 
-**NOTE: KEEP IN MIND THAT THREE OF THESE LEGS MUST BE FLIPPED**
-
 **NOTE: DO NOT FORGET THE 18 FRICTION CAP RINGS**
 
 The above document provides a visual on how parts are assembled, to assemble this in real life you must follow the [Frame and Legs](./pictures/frampluslegs_page_1.jpg) and [Hexapod](./pictures/hexapod_page_1.jpg) technical drawings. The order of operations is very important here, so making sure proper understanding is acquired before continuing is mandatory.
@@ -59,6 +81,8 @@ For screw sizes needed:
 
 Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg orientation assembly.
 
+It is very recommended to apply sillicone based grease between the friction caps and legs to prevent plastic wear.
+
 # Pre-powering on precautions
 
 - Make sure the legs of the hexapod are clear of any obstacles.
@@ -67,7 +91,9 @@ Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg 
 
 # Remote assembly
 
-Follow the diagram to assemble the remote, every screw used is M2 8mm.
+Start by buying the PCB on [JLCPCB.](https://cart.jlcpcb.com/quote?stencilLayer=2&stencilWidth=100&stencilLength=100&stencilCounts=5&plateType=1&spm=Jlcpcb.Homepage.1010) by simply drag and droping the [gerber]() files.
+
+Once you have received and soldered your PCB, follow the diagram to assemble the remote, every screw used is M2 8mm.
 
   <img src="/pictures/HEX_remote_assembly.jpg" height="400" />
 
