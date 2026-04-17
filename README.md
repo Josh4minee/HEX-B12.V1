@@ -15,6 +15,13 @@ Consult the following based on your needs:
 - [Sources](#sources)
 - [License](#license)
 
+# Wiring diagram
+
+Here you can find the wiring diagram, the component positions and the real world example of how it looks once completed.
+  <img src="/pictures/hexapod circuit.png" height="500" />
+  <img src="/pictures/Components_layout.png" height="500" />
+  <img src="/pictures/IRL_wiring.jpg" height="500" />
+  
 # Hexapod assembly
 - [Coxa](./pictures/coxa_page_1.jpg)
 - [Femur](./pictures/femur_page_1.jpg)
