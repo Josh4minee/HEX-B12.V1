@@ -125,6 +125,8 @@ The lower knob is for global height offset, the upper knob is used to control wh
 
 # Sources
 
+Huge thanks to to [MYP](https://www.makeyourpet.com/) for the inspiration and just overall help their discord community provided to this project!
+
 Here is a list of every model I used from GrabCad to display electronic components and screws in my assem,blies:
 
 - [All M3-M2 screws](https://grabcad.com/library/m2-metric-socket-cap-head-screws-1)
