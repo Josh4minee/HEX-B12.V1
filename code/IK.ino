@@ -1,3 +1,6 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
 #include <math.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -18,6 +21,25 @@ int minPulses[18] = {113, 97, 130, 118, 87, 126, 105, 101, 117, 125, 113, 117, 1
 int maxPulses[18] = {518, 502, 535, 523, 492, 531, 510, 506, 522, 530, 518, 522, 531, 522, 522, 494, 539, 527};
 
 
+//---------------------------------------------------
+
+RF24 radio(8, 9); // CE, CSN
+
+const byte address[6] = "00001";
+
+unsigned long lastReceiveTime = 0;
+unsigned long currentTime = 0;
+
+struct Data_Package { // data package sent to hexapod
+  byte mode;
+  byte height;
+  byte joystick_x;
+  byte joystick_y;
+  byte joystick_select;
+  byte option;
+};
+Data_Package data; //Create a variable with the above structure
+
 //-------------------------------------------------------SETUP---------------------------------------------------------
 void setup()
 {
@@ -35,17 +57,133 @@ void setup()
   pinMode(7, OUTPUT);
   digitalWrite(4, LOW);
   digitalWrite(7, LOW);
+
+  radio.begin();                                 //----NRF transmission setup
+  radio.openReadingPipe(0, address);
+  radio.setPALevel(RF24_PA_LOW);
+  radio.startListening();
 }
 
 
 //-------------------------------------------------------LOOP----------------------------------------------------------
 void loop()
 {
-  delay(10000);
   if(START == true){
   startAnim();
-  START = !START;
+  START = false;
   }
+
+  if (radio.available())
+  {
+    radio.read(&data, sizeof(Data_Package));
+
+    // Debug print
+    //Serial.print("Mode: "); Serial.println(data.mode);
+    //Serial.print("Height: "); Serial.println(data.height);
+    //Serial.print("Joy X: "); Serial.println(data.joystick_x);
+    //Serial.print("Joy Y: "); Serial.println(data.joystick_y);
+    //Serial.print("Joy Btn: "); Serial.println(data.joystick_select);
+    //Serial.print("Option: "); Serial.println(data.option);
+  }
+
+  switch(data.mode)
+  {
+    case 1: mode1(); break;
+    case 2: mode2(); break;
+    case 3: mode3(); break;
+    case 4: mode4(); break;
+  }
+}
+
+int mode1(){
+
+}
+
+int mode2(){
+  IK(175, 175, -50, 1);
+  IK(210,   0, -70, 2);
+  IK(175, -175, -50, 3);
+  IK(-175,-175, -70, 4);
+  IK(-210,  0, -50, 5);
+  IK(-175, 175, -70, 6);
+  delay(150);
+  IK(175, 175+40, -70, 1);
+  IK(210,   0-40, -70, 2);
+  IK(175, -175+40, -70, 3);
+  IK(-175,-175-40, -70, 4);
+  IK(-210,  0+40, -70, 5);
+  IK(-175, 175-40, -70, 6);
+  delay(150);
+  IK(175, 175, -70, 1);
+  IK(210,   0, -50, 2);
+  IK(175, -175, -70, 3);
+  IK(-175,-175, -50, 4);
+  IK(-210,  0, -70, 5);
+  IK(-175, 175, -50, 6);
+  delay(150);
+  IK(175, 175-40, -70, 1);
+  IK(210,   0+40, -70, 2);
+  IK(175, -175-40, -70, 3);
+  IK(-175,-175+40, -70, 4);
+  IK(-210,  0-40, -70, 5);
+  IK(-175, 175+40, -70, 6);
+  delay(150);
+}
+
+int mode3(){
+  switch(data.option){
+    case 1: {
+      int H = map(data.height, 0, 255, 30, -30);
+      int X = map(data.joystick_y, 0, 255, 40, -40);
+      int Y = map(data.joystick_x, 0, 255, 40, -40);
+      IK(175 + X, 175 + Y, -70 + H, 1);
+      IK(210 + X,   0 + Y, -70 + H, 2);
+      IK(175 + X, -175 + Y, -70 + H, 3);
+      IK(-175 + X,-175 + Y, -70 + H, 4);
+      IK(-210 + X,  0 + Y, -70 + H, 5);
+      IK(-175 + X, 175 + Y, -70 + H, 6);
+    break;
+    }
+    case 2: {
+      int H = map(data.height, 0, 255, 30, -30);
+      float angle = map(data.joystick_y, 0, 255, 25, -25) * PI / 180.0;
+      int pointsX[] = {175, 210, 175, -175, -210, -175};
+      int pointsY[] = {175, 0, -175, -175, 0, 175};
+      for(int i = 0; i < 6; i++){
+        int X = pointsX[i];
+        int Y = pointsY[i];
+        int XR = X*cos(angle) - Y*sin(angle);
+        int YR = X*sin(angle) + Y*cos(angle);
+        IK(XR, YR, -70 + H, i+1);
+      }
+    break;
+    }
+    case 3: {
+      int H = map(data.height, 0, 255, 0, -15);
+      float angleX = map(data.joystick_y, 0, 255, -10, 10) * PI / 180.0;
+      float angleY = map(data.joystick_x, 0, 255, -10, 10) * PI / 180.0;
+      int pointsX[] = {175, 210, 175, -175, -210, -175};
+      int pointsY[] = {175, 0, -175, -175, 0, 175};
+      for(int i = 0; i < 6; i++){
+        int X = pointsX[i];
+        int Y = pointsY[i];
+        int Z = -70;
+
+        int XR = X*cos(angleX) - Z*sin(angleX); //first rotation
+        int ZR = X*sin(angleX) + Z*cos(angleX);
+
+        int YR = Y*cos(angleY) - ZR*sin(angleY); //second rotation
+        Z = Y*sin(angleY) + ZR*cos(angleY);
+
+        IK(XR, YR, Z + H, i+1);
+      }
+    break;
+    }
+  }
+}
+
+int mode4(){
+
 }
 
 
@@ -169,23 +307,23 @@ int startAnim(){
   IK(-240, -98, 20, 4);
   IK(-240, 0, 20, 5);
   IK(-240, 98, 20, 6);
-  delay(2000);
+  delay(1000);
   IK(190, 190, 0, 1);
   IK(220, 0, 0, 2);
   IK(190, -190, 0, 3);
   IK(-190, -190, 0, 4);
   IK(-220, 0, 0, 5);
   IK(-190, 190, 0, 6);
-  delay(2000);
-  for(int i = 0; i >= -60; i -= 5)
+  delay(1000);
+  for(int i = 0; i >= -70; i -= 5)
 {
-  IK(190, 190, i, 1);
-  IK(220,   0, i, 2);
-  IK(190, -190, i, 3);
-  IK(-190,-190, i, 4);
-  IK(-220,  0, i, 5);
-  IK(-190, 190, i, 6);
+  IK(175, 175, i, 1);
+  IK(210,   0, i, 2);
+  IK(175, -175, i, 3);
+  IK(-175,-175, i, 4);
+  IK(-210,  0, i, 5);
+  IK(-175, 175, i, 6);
   delay(5);
 }
-delay(2000);
+delay(1000);
 }
