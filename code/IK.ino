@@ -4,6 +4,7 @@
 #include <math.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include <FastLED.h>
 
 bool START = true;
 
@@ -14,14 +15,39 @@ const float l = 44.0; //coxa
 const int relay1 = 4;
 const int relay2 = 7;
 
+CRGB leds1[5];
+CRGB leds2[5];
+
+int light;
+
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
 Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(0x41);
 
 int minPulses[18] = {113, 97, 130, 118, 87, 126, 105, 101, 117, 125, 113, 117, 126, 117, 117, 89, 134, 122};
 int maxPulses[18] = {518, 502, 535, 523, 492, 531, 510, 506, 522, 530, 518, 522, 531, 522, 522, 494, 539, 527};
 
+int pointsX[] = {175, 210, 175, -175, -210, -175};
+int pointsY[] = {175, 0, -175, -175, 0, 175};
 
-//---------------------------------------------------
+//------------------------------------------------------GAITs---------------------------------------------------------
+
+int GAIT[3][8] = {
+  {0, 0, 0, 0, 0, 0, 4, 4},   // Tripod
+  {0, 0, 0, 0, 0, 0, 4, 4},    // Wave
+  {0, 0, 0, 0, 0, 0, 4, 4}       // Ripple
+};
+
+//---------------------------------------------------Mode2 Variables--------------------------------------------------
+
+unsigned long lastStep[6] = {0};
+unsigned long stepDelay = 20;
+
+int lastOption = 0;
+int lastMode = 3;
+int state[6];
+int i[6];
+
+//---------------------------------------------------receiverSetup----------------------------------------------------
 
 RF24 radio(8, 9); // CE, CSN
 
@@ -62,6 +88,14 @@ void setup()
   radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_LOW);
   radio.startListening();
+
+  
+  FastLED.addLeds<WS2812B, 5, GRB>(leds1, 5); //-----LED setup
+  FastLED.addLeds<WS2812B, 6, GRB>(leds2, 5);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+  FastLED.setBrightness(60);
+  FastLED.clear();
+  FastLED.show();
 }
 
 
@@ -85,6 +119,22 @@ void loop()
     //Serial.print("Joy Btn: "); Serial.println(data.joystick_select);
     //Serial.print("Option: "); Serial.println(data.option);
   }
+  
+  light = analogRead(A3); // LED check
+  if (light < 15) {
+    for (int i = 0; i < 5; i++) {
+      leds1[i] = CRGB(255, 110, 0);
+      leds2[i] = CRGB(255, 110, 0);
+      FastLED.show();
+    }
+  }
+  else {
+    for (int i = 0; i < 5; i++) {
+      leds1[i] = CRGB(0, 0, 0);
+      leds2[i] = CRGB(0, 0, 0);
+      FastLED.show();
+    }
+  }
 
   switch(data.mode)
   {
@@ -95,45 +145,37 @@ void loop()
   }
 }
 
-int mode1(){
+int mode1(){ // in development
 
 }
 
-int mode2(){
-  IK(175, 175, -50, 1);
-  IK(210,   0, -70, 2);
-  IK(175, -175, -50, 3);
-  IK(-175,-175, -70, 4);
-  IK(-210,  0, -50, 5);
-  IK(-175, 175, -70, 6);
-  delay(150);
-  IK(175, 175+40, -70, 1);
-  IK(210,   0-40, -70, 2);
-  IK(175, -175+40, -70, 3);
-  IK(-175,-175-40, -70, 4);
-  IK(-210,  0+40, -70, 5);
-  IK(-175, 175-40, -70, 6);
-  delay(150);
-  IK(175, 175, -70, 1);
-  IK(210,   0, -50, 2);
-  IK(175, -175, -70, 3);
-  IK(-175,-175, -50, 4);
-  IK(-210,  0, -70, 5);
-  IK(-175, 175, -50, 6);
-  delay(150);
-  IK(175, 175-40, -70, 1);
-  IK(210,   0+40, -70, 2);
-  IK(175, -175-40, -70, 3);
-  IK(-175,-175+40, -70, 4);
-  IK(-210,  0-40, -70, 5);
-  IK(-175, 175+40, -70, 6);
-  delay(150);
+int mode2() {
+  if (data.option != lastOption) // checks for previous cycle
+  lastMode = 0;
+  lastOption = data.option;
+
+  if (lastMode != 2) {
+    state[0] = 1; i[0] = GAIT[data.option - 1][0]; // call selected GAIT
+    state[1] = 2; i[1] = GAIT[data.option - 1][1];
+    state[2] = 1; i[2] = GAIT[data.option - 1][2];
+    state[3] = 2; i[3] = GAIT[data.option - 1][3];
+    state[4] = 1; i[4] = GAIT[data.option - 1][4];
+    state[5] = 2; i[5] = GAIT[data.option - 1][5];
+    lastMode = 2;
+  }
+
+  legSwingC(1); // call leg swing
+  legSwingC(2);
+  legSwingC(3);
+  legSwingC(4);
+  legSwingC(5);
+  legSwingC(6);
 }
 
 int mode3(){
   switch(data.option){
     case 1: {
-      int H = map(data.height, 0, 255, 30, -30);
+      int H = map(data.height, 0, 255, 30, -30);       // option one, translation math
       int X = map(data.joystick_y, 0, 255, 40, -40);
       int Y = map(data.joystick_x, 0, 255, 40, -40);
       IK(175 + X, 175 + Y, -70 + H, 1);
@@ -145,10 +187,8 @@ int mode3(){
     break;
     }
     case 2: {
-      int H = map(data.height, 0, 255, 30, -30);
+      int H = map(data.height, 0, 255, 30, -30);       // option one, Z rotation math
       float angle = map(data.joystick_y, 0, 255, 25, -25) * PI / 180.0;
-      int pointsX[] = {175, 210, 175, -175, -210, -175};
-      int pointsY[] = {175, 0, -175, -175, 0, 175};
       for(int i = 0; i < 6; i++){
         int X = pointsX[i];
         int Y = pointsY[i];
@@ -159,11 +199,9 @@ int mode3(){
     break;
     }
     case 3: {
-      int H = map(data.height, 0, 255, 0, -15);
+      int H = map(data.height, 0, 255, 0, -15);          // option one, X and Y dual rotation math
       float angleX = map(data.joystick_y, 0, 255, -10, 10) * PI / 180.0;
       float angleY = map(data.joystick_x, 0, 255, -10, 10) * PI / 180.0;
-      int pointsX[] = {175, 210, 175, -175, -210, -175};
-      int pointsY[] = {175, 0, -175, -175, 0, 175};
       for(int i = 0; i < 6; i++){
         int X = pointsX[i];
         int Y = pointsY[i];
@@ -182,7 +220,7 @@ int mode3(){
   }
 }
 
-int mode4(){
+int mode4(){ // in development
 
 }
 
@@ -299,22 +337,169 @@ int writeAngles(float C, float F, float T, int leg)
     }
   }
 }
+//------------------------------------------------------legSwingC------------------------------------------------------
+int legSwingC(int legID) {
 
-int startAnim(){
+  legID--;
+  int R = 40;
+  int Y;
+  int Z;
+
+  if (millis() - lastStep[legID] >= stepDelay && (data.joystick_x > 132)){
+
+    // ---------------- SEMICIRCLE ----------------
+    if (state[legID] == 1){
+
+      Y = i[legID];
+      Z = sqrt(R * R - Y * Y);
+
+      i[legID]+= 4;
+
+      if (i[legID] == 40)
+      state[legID] = 2;
+
+      lastStep[legID] = millis();
+      IK(pointsX[legID], pointsY[legID] + Y, -90 + Z, legID + 1);
+    }
+
+    // ---------------- STRAIGHT LINE ----------------
+    else if (state[legID] == 2){
+
+      Y = i[legID];
+      Z = 0;
+
+      i[legID]-= 8;
+      
+      if (i[legID] == -40)
+        state[legID] = 1;
+
+      lastStep[legID] = millis();
+
+      IK(pointsX[legID], pointsY[legID] + Y, -90 + Z, legID + 1);
+    }
+  }
+  if (millis() - lastStep[legID] >= stepDelay && (data.joystick_x < 120)){
+
+    // ---------------- SEMICIRCLE ----------------
+    if (state[legID] == 1){
+
+      Y = i[legID];
+      Z = sqrt(R * R - Y * Y);
+
+      i[legID]-= 4;
+
+      if (i[legID] == -40)
+      state[legID] = 2;
+
+      lastStep[legID] = millis();
+      IK(pointsX[legID], pointsY[legID] + Y, -90 + Z, legID + 1);
+    }
+
+    // ---------------- STRAIGHT LINE ----------------
+    else if (state[legID] == 2){
+
+      Y = i[legID];
+      Z = 0;
+
+      i[legID]+= 8;
+      
+      if (i[legID] == 40)
+        state[legID] = 1;
+
+      lastStep[legID] = millis();
+
+      IK(pointsX[legID], pointsY[legID] + Y, -90 + Z, legID + 1);
+    }
+  }
+
+
+
+
+    if (millis() - lastStep[legID] >= stepDelay && (data.joystick_y > 132)){
+
+    // ---------------- SEMICIRCLE ----------------
+    if (state[legID] == 1){
+
+      Y = i[legID];
+      Z = sqrt(R * R - Y * Y);
+
+      i[legID]+= 1;
+
+      if (i[legID] == 40)
+      state[legID] = 2;
+
+      lastStep[legID] = millis();
+      IK(pointsX[legID] + Y, pointsY[legID], -90 + Z, legID + 1);
+    }
+
+    // ---------------- STRAIGHT LINE ----------------
+    else if (state[legID] == 2){
+
+      Y = i[legID];
+      Z = 0;
+
+      i[legID]-= 1;
+      
+      if (i[legID] == -40)
+        state[legID] = 1;
+
+      lastStep[legID] = millis();
+
+      IK(pointsX[legID] + Y, pointsY[legID], -90 + Z, legID + 1);
+    }
+  }
+  if (millis() - lastStep[legID] >= stepDelay && (data.joystick_y < 120)){
+
+    // ---------------- SEMICIRCLE ----------------
+    if (state[legID] == 1){
+
+      Y = i[legID];
+      Z = sqrt(R * R - Y * Y);
+
+      i[legID]-= 1;
+
+      if (i[legID] == -40)
+      state[legID] = 2;
+
+      lastStep[legID] = millis();
+      IK(pointsX[legID] + Y, pointsY[legID], -90 + Z, legID + 1);
+    }
+
+    // ---------------- STRAIGHT LINE ----------------
+    else if (state[legID] == 2){
+
+      Y = i[legID];
+      Z = 0;
+
+      i[legID]+= 1;
+      
+      if (i[legID] == 40)
+        state[legID] = 1;
+
+      lastStep[legID] = millis();
+
+      IK(pointsX[legID] + Y, pointsY[legID], -90 + Z, legID + 1);
+    }
+  }
+
+  lastMode = 2;
+}
+
+int startAnim(){ // first frame
   IK(240, 98, 20, 1);
   IK(240, 0, 20, 2);
   IK(240, -98, 20, 3);
   IK(-240, -98, 20, 4);
   IK(-240, 0, 20, 5);
   IK(-240, 98, 20, 6);
-  delay(1000);
+  delay(1000);   //second frame
   IK(190, 190, 0, 1);
   IK(220, 0, 0, 2);
   IK(190, -190, 0, 3);
   IK(-190, -190, 0, 4);
   IK(-220, 0, 0, 5);
   IK(-190, 190, 0, 6);
-  delay(1000);
+  delay(1000);   //push up frames sequence
   for(int i = 0; i >= -70; i -= 5)
 {
   IK(175, 175, i, 1);
