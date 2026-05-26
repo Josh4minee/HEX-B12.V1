@@ -13,6 +13,7 @@ Consult the following based on your needs:
 - [Printing](#printing)
 - [Wiring diagram](#wiring-diagram)
 - [Hexapod Assembly](#hexapod-assembly)
+- [Hexapod pictures and videos](#hexapod-pictures-and-videos)
 - [Pre-powering on precautions](#pre-powering-on-precautions)
 - [Remote Assembly](#remote-assembly)
 - [How to use the remote](#how-to-use-the-remote)
@@ -95,6 +96,21 @@ For screw sizes needed:
 Follow [this](./pictures/leg_orientations.png) technical drawing for proper leg orientation assembly.
 
 It is very recommended to apply sillicone based grease between the friction caps and legs to prevent plastic wear.
+
+# Hexapod pictures and videos
+
+Here is what the robot should look like once fully assembled:
+<img src="/pictures/hexapod_front.jpg" height="500" />
+<img src="/pictures/hexapod_back.jpg" height="500" />
+<img src="/pictures/hexapod_underglow.jpg" height="500" />
+
+Here is what the remote should look like once fully assembled:
+<img src="/pictures/remote.jpg" height="500" />
+
+Here is a video demonstrating the functionalities of the hexapod:
+<a href="https://www.youtube.com/watch?v=I4sm94-dwU4">
+  <img src="https://img.youtube.com/vi/I4sm94-dwU4/maxresdefault.jpg" height="500">
+</a>
 
 # Pre-powering on precautions
 
