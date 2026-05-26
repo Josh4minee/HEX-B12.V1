@@ -111,6 +111,9 @@ Here is a video demonstrating the functionalities of the hexapod:
 <a href="https://www.youtube.com/watch?v=I4sm94-dwU4">
   <img src="https://img.youtube.com/vi/I4sm94-dwU4/maxresdefault.jpg" height="500">
 </a>
+<video width="500" controls>
+  <source src="hexapod.mp4" type="video/mp4">
+</video>
 
 # Pre-powering on precautions
 
