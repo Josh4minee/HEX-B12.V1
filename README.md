@@ -101,7 +101,7 @@ It is very recommended to apply sillicone based grease between the friction caps
 
 Here is what the robot should look like once fully assembled:
 <img src="/pictures/hexapod_front.jpg" height="500" />
-<img src="/pictures/hexapod_back.jpg" height="500" />
+<img src="/pictures/hexapod_top.jpg" height="500" />
 <img src="/pictures/hexapod_underglow.jpg" height="500" />
 
 Here is what the remote should look like once fully assembled:
